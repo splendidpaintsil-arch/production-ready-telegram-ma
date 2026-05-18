@@ -15,15 +15,15 @@ export async function runBacktest({ symbol = "EURUSD", timeframe = "1m", strateg
     symbol: market.symbol,
     timeframe: market.timeframe,
     strategy,
-    dataMode: market.demo ? "demo historical simulation" : "provider historical simulation",
+    dataMode: market.demo ? "demo historical simulation, not live market data" : "provider historical simulation",
     totalSimulatedTrades: trades,
     winRate,
     drawdown,
     profitFactor,
     averageTradeDuration: timeframe === "1m" ? "3 candles" : "2 candles",
     sharpeLikeRatio: Number(((winRate - 50) / Math.max(5, drawdown)).toFixed(2)),
-    stabilityNotes: winRate > 58 ? "Promising but must be forward-tested in demo mode." : "Mixed result; tighten filters or avoid low-volatility sessions.",
-    disclaimer: "Backtesting is simulation only. It does not imply live trading profitability.",
+    stabilityNotes: winRate > 58 ? "Promising in this bounded simulation, but it must be forward-tested in demo mode." : "Mixed bounded simulation result; tighten filters or avoid low-quality sessions.",
+    disclaimer: "Backtesting is educational simulation only. It does not predict future results and does not imply live profitability.",
   };
 }
 

@@ -29,12 +29,13 @@ export function createBot() {
 
   bot.callbackQuery("open_help", async (ctx) => {
     await ctx.answerCallbackQuery();
-    await ctx.reply("Use /help to see commands and the risk disclaimer.");
+    await ctx.reply("Use /help to see commands, supported symbols, timeframes, and the risk disclaimer.");
   });
 
   bot.callbackQuery("dashboard_missing", async (ctx) => {
     await ctx.answerCallbackQuery({ text: "Dashboard URL not configured" });
-    await ctx.reply("The Mini App URL is not configured yet. Set WEBAPP_PUBLIC_URL or deploy on Render so RENDER_EXTERNAL_URL is available.");
+    log.warn("miniapp.url.fallback", { callback: "dashboard_missing", dashboardUrlSet: false });
+    await ctx.reply("The Mini App URL is not configured yet. Set WEBAPP_PUBLIC_URL or deploy on Render so RENDER_EXTERNAL_URL is available. The app is served at /app.");
   });
 
   bot.catch((err) => {

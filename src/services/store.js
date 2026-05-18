@@ -1,5 +1,5 @@
 import { getDb, safeInsert, safeUpsert } from "../lib/db.js";
-import { DEFAULT_ASSETS } from "./market.js";
+import { ASSET_CATEGORIES, DEFAULT_ASSETS } from "./market.js";
 import { log, safeErr } from "../lib/log.js";
 
 const mem = {
@@ -15,16 +15,15 @@ const mem = {
 export async function touchUser(ctx) {
   const telegramId = String(ctx.from?.id || "");
   if (!telegramId) return;
-  const user = {
-    telegramId,
+  const mutable = {
     username: ctx.from?.username || "",
     firstName: ctx.from?.first_name || "",
     defaultAsset: "EURUSD",
     defaultTimeframe: "1m",
     lastSeenAt: new Date(),
   };
-  mem.users.set(telegramId, { ...(mem.users.get(telegramId) || {}), ...user });
-  await safeUpsert("users", { telegramId }, user, { telegramId, acceptedRiskDisclaimerAt: new Date() });
+  mem.users.set(telegramId, { ...(mem.users.get(telegramId) || {}), telegramId, ...mutable });
+  await safeUpsert("users", { telegramId }, mutable, { telegramId, acceptedRiskDisclaimerAt: new Date() });
 }
 
 export async function listAssets() {
@@ -41,6 +40,10 @@ export async function listAssets() {
     log.error("db.read.failed", { collection: "assets", operation: "find", err: safeErr(err) });
     return DEFAULT_ASSETS;
   }
+}
+
+export function listAssetCategories() {
+  return ASSET_CATEGORIES;
 }
 
 export async function saveSignal(telegramId, signal) {
@@ -99,7 +102,14 @@ export async function listAlerts(telegramId) {
 
 export async function saveAlert(telegramId, alert) {
   const id = String(telegramId || "");
-  const clean = { telegramId: id, symbol: alert.symbol || "EURUSD", timeframe: alert.timeframe || "1m", threshold: Number(alert.threshold || 70), type: alert.type || "signal_confidence", active: true };
+  const clean = {
+    telegramId: id,
+    symbol: String(alert.symbol || "EURUSD").toUpperCase().slice(0, 16),
+    timeframe: String(alert.timeframe || "1m").slice(0, 8),
+    threshold: Number(alert.threshold || 70),
+    type: alert.type || "signal_confidence",
+    active: true,
+  };
   const arr = mem.alerts.get(id) || [];
   arr.unshift({ ...clean, updatedAt: new Date() });
   mem.alerts.set(id, arr.slice(0, 50));

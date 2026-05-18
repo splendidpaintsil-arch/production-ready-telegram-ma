@@ -376,22 +376,154 @@
   ],
   "runStatuses": {
     "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp": {
-      "phase": "editing",
+      "phase": "reindex",
       "stage": "chat",
       "runId": "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp",
       "lastUserMessage": "The bot should predict on live real market chart it should not be only one currency pair",
       "startedAt": "2026-05-18T02:51:49.486Z",
-      "updatedAt": "2026-05-18T02:57:23.796Z",
-      "message": "Preparing workspace for safe edits…"
+      "updatedAt": "2026-05-18T02:57:25.083Z",
+      "message": "Syncing environment template with used env variables…",
+      "commands": [
+        {
+          "name": "admin",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "alerts",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "assets",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "backtest",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "chart",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "dashboard",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "help",
+          "file": "src/commands/help.js"
+        },
+        {
+          "name": "indicators",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "journal",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "market",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "patterns",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "reset",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "risk",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "signal",
+          "file": "src/commands/trading.js"
+        },
+        {
+          "name": "start",
+          "file": "src/commands/start.js"
+        },
+        {
+          "name": "strategies",
+          "file": "src/commands/trading.js"
+        }
+      ]
     }
   },
   "runStatus": {
-    "phase": "editing",
+    "phase": "reindex",
     "stage": "chat",
     "runId": "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp",
     "lastUserMessage": "The bot should predict on live real market chart it should not be only one currency pair",
     "startedAt": "2026-05-18T02:51:49.486Z",
-    "updatedAt": "2026-05-18T02:57:23.796Z",
-    "message": "Preparing workspace for safe edits…"
+    "updatedAt": "2026-05-18T02:57:25.083Z",
+    "message": "Syncing environment template with used env variables…",
+    "commands": [
+      {
+        "name": "admin",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "alerts",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "assets",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "backtest",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "chart",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "dashboard",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "help",
+        "file": "src/commands/help.js"
+      },
+      {
+        "name": "indicators",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "journal",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "market",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "patterns",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "reset",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "risk",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "signal",
+        "file": "src/commands/trading.js"
+      },
+      {
+        "name": "start",
+        "file": "src/commands/start.js"
+      },
+      {
+        "name": "strategies",
+        "file": "src/commands/trading.js"
+      }
+    ]
   }
 }

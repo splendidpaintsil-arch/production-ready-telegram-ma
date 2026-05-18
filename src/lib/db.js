@@ -60,8 +60,10 @@ async function ensureIndexes(database) {
 export async function safeInsert(collection, doc) {
   const database = await getDb();
   if (!database) return null;
+  const clean = { ...(doc || {}) };
+  delete clean._id;
   try {
-    return await database.collection(collection).insertOne({ ...doc, createdAt: new Date() });
+    return await database.collection(collection).insertOne({ ...clean, createdAt: clean.createdAt || new Date() });
   } catch (err) {
     log.error("db.write.failed", { collection, operation: "insertOne", err: safeErr(err) });
     return null;
@@ -74,6 +76,7 @@ export async function safeUpsert(collection, filter, mutableFields, insertOnly =
   const clean = { ...(mutableFields || {}) };
   delete clean._id;
   delete clean.createdAt;
+  for (const key of Object.keys(insertOnly || {})) delete clean[key];
   try {
     return await database.collection(collection).updateOne(
       filter,

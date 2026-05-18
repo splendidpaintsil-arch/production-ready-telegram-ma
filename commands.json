@@ -16,6 +16,10 @@
     "file": "src/commands/trading.js"
   },
   {
+    "name": "chart",
+    "file": "src/commands/trading.js"
+  },
+  {
     "name": "dashboard",
     "file": "src/commands/trading.js"
   },

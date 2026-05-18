@@ -5,11 +5,11 @@ import { fileURLToPath } from "node:url";
 import { cfg, isAdminTelegramId } from "../lib/config.js";
 import { log, safeErr } from "../lib/log.js";
 import { generateSignal } from "../services/signal.js";
-import { getCandles, currentQuote } from "../services/market.js";
+import { getCandles, currentQuote, SUPPORTED_TIMEFRAMES, validateMarketInput } from "../services/market.js";
 import { computeIndicators, indicatorRows } from "../services/indicators.js";
 import { detectPatterns } from "../services/patterns.js";
 import { runBacktest } from "../services/backtest.js";
-import { adminStats, getRiskSettings, listAlerts, listAssets, listStrategies, listTrades, saveAlert, saveJournalTrade } from "../services/store.js";
+import { adminStats, getRiskSettings, listAlerts, listAssetCategories, listAssets, listStrategies, listTrades, saveAlert, saveJournalTrade } from "../services/store.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -38,7 +38,7 @@ function parseInitData(initData = "") {
   const dataCheckString = [...params.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join("\n");
   const secret = crypto.createHmac("sha256", "WebAppData").update(cfg.TELEGRAM_BOT_TOKEN).digest();
   const expected = crypto.createHmac("sha256", secret).update(dataCheckString).digest("hex");
-  const valid = crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(hash));
+  const valid = expected.length === hash.length && crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(hash));
   let user = null;
   try { user = JSON.parse(params.get("user") || "null"); } catch {}
   return { valid, user };
@@ -49,6 +49,12 @@ function webUser(req) {
   const parsed = parseInitData(initData);
   if (parsed.valid && parsed.user?.id) return { id: String(parsed.user.id), valid: true, admin: isAdminTelegramId(parsed.user.id), user: parsed.user };
   return { id: "demo", valid: false, admin: false, user: null };
+}
+
+function marketParams(req) {
+  const symbol = String(req.query.symbol || req.body?.symbol || "EURUSD");
+  const timeframe = String(req.query.timeframe || req.body?.timeframe || "1m");
+  return validateMarketInput(symbol, timeframe);
 }
 
 function sendIndex(req, res) {
@@ -68,7 +74,7 @@ export function createServer() {
     next();
   });
 
-  app.get("/health", (req, res) => res.json({ ok: true, service: "pocket-signal", dashboard: Boolean(cfg.DASHBOARD_URL), mongo: Boolean(cfg.MONGODB_URI) }));
+  app.get("/health", (req, res) => res.json({ ok: true, service: "pocket-signal", dashboard: Boolean(cfg.DASHBOARD_URL), mongo: Boolean(cfg.MONGODB_URI), marketProvider: Boolean(cfg.MARKET_DATA_ENDPOINT && cfg.MARKET_DATA_API_KEY) }));
 
   app.get("/api/bootstrap", async (req, res) => {
     try {
@@ -80,7 +86,7 @@ export function createServer() {
         listStrategies(auth.id),
         listTrades(auth.id),
       ]);
-      res.json({ ok: true, auth, assets, risk, alerts, strategies, trades, adminEnabled: cfg.ADMIN_TELEGRAM_IDS.length > 0, disclaimer: "Educational probability-based analysis only. Not financial advice. Trading can result in losses." });
+      res.json({ ok: true, auth, assets, assetCategories: listAssetCategories(), timeframes: SUPPORTED_TIMEFRAMES, risk, alerts, strategies, trades, adminEnabled: cfg.ADMIN_TELEGRAM_IDS.length > 0, disclaimer: "Educational probability-based analysis only. Not financial advice. Trading can result in losses." });
     } catch (err) {
       log.error("api.bootstrap.error", { err: safeErr(err) });
       res.status(500).json({ ok: false, error: "Unable to load dashboard data." });
@@ -89,11 +95,11 @@ export function createServer() {
 
   app.get("/api/market", async (req, res) => {
     try {
-      const symbol = String(req.query.symbol || "EURUSD");
-      const timeframe = String(req.query.timeframe || "1m");
-      const market = await getCandles(symbol, timeframe);
+      const parsed = marketParams(req);
+      if (!parsed.ok) return res.status(400).json({ ok: false, error: parsed.error });
+      const market = await getCandles(parsed.symbol, parsed.timeframe);
       const quote = currentQuote(market.candles);
-      res.json({ ok: true, ...market, quote, candles: market.candles.slice(-80) });
+      res.json({ ok: true, ...market, quote, candles: market.candles.slice(-100) });
     } catch (err) {
       log.error("api.market.error", { err: safeErr(err) });
       res.status(500).json({ ok: false, error: "Market data unavailable. Demo data may be used shortly." });
@@ -102,10 +108,12 @@ export function createServer() {
 
   app.get("/api/indicators", async (req, res) => {
     try {
-      const market = await getCandles(String(req.query.symbol || "EURUSD"), String(req.query.timeframe || "1m"));
+      const parsed = marketParams(req);
+      if (!parsed.ok) return res.status(400).json({ ok: false, error: parsed.error });
+      const market = await getCandles(parsed.symbol, parsed.timeframe);
       const quote = currentQuote(market.candles);
       const indicators = computeIndicators(market.candles);
-      res.json({ ok: true, demo: market.demo, rows: indicatorRows(indicators, quote.price), indicators, patterns: detectPatterns(market.candles) });
+      res.json({ ok: true, demo: market.demo, dataMode: market.dataMode, rows: indicatorRows(indicators, quote.price), indicators, patterns: detectPatterns(market.candles) });
     } catch (err) {
       log.error("api.indicators.error", { err: safeErr(err) });
       res.status(500).json({ ok: false, error: "Indicator calculation failed." });
@@ -114,7 +122,9 @@ export function createServer() {
 
   app.post("/api/signal", async (req, res) => {
     try {
-      const signal = await generateSignal({ symbol: req.body?.symbol || "EURUSD", timeframe: req.body?.timeframe || "1m", withAi: true });
+      const parsed = marketParams(req);
+      if (!parsed.ok) return res.status(400).json({ ok: false, error: parsed.error });
+      const signal = await generateSignal({ symbol: parsed.symbol, timeframe: parsed.timeframe, withAi: true });
       res.json({ ok: true, signal });
     } catch (err) {
       log.error("api.signal.error", { err: safeErr(err) });
@@ -124,7 +134,9 @@ export function createServer() {
 
   app.post("/api/backtest", async (req, res) => {
     try {
-      const result = await runBacktest({ symbol: req.body?.symbol, timeframe: req.body?.timeframe, strategy: req.body?.strategy });
+      const parsed = marketParams(req);
+      if (!parsed.ok) return res.status(400).json({ ok: false, error: parsed.error });
+      const result = await runBacktest({ symbol: parsed.symbol, timeframe: parsed.timeframe, strategy: req.body?.strategy });
       res.json({ ok: true, result });
     } catch (err) {
       log.error("api.backtest.error", { err: safeErr(err) });
@@ -136,7 +148,7 @@ export function createServer() {
     try {
       const auth = webUser(req);
       const trade = await saveJournalTrade(auth.id, {
-        asset: String(req.body?.asset || "EURUSD").slice(0, 16),
+        asset: String(req.body?.asset || "EURUSD").toUpperCase().slice(0, 16),
         direction: String(req.body?.direction || "NEUTRAL").slice(0, 16),
         entry: Number(req.body?.entry || 0),
         result: String(req.body?.result || "pending").slice(0, 24),

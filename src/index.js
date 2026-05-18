@@ -67,14 +67,19 @@ async function boot() {
       { command: "start", description: "Welcome and dashboard buttons" },
       { command: "help", description: "Commands and risk disclaimer" },
       { command: "dashboard", description: "Open Mini App dashboard" },
+      { command: "chart", description: "Open or display live chart" },
+      { command: "assets", description: "Supported example assets" },
       { command: "market", description: "Current market overview" },
       { command: "signal", description: "Generate probability-based signal" },
+      { command: "indicators", description: "Technical indicator readings" },
+      { command: "patterns", description: "Candlestick pattern detection" },
       { command: "alerts", description: "Manage alerts" },
       { command: "journal", description: "Log demo trade" },
       { command: "risk", description: "View risk settings" },
       { command: "backtest", description: "Run strategy simulation" },
       { command: "strategies", description: "Manage strategies" },
       { command: "admin", description: "Admin panel" },
+      { command: "reset", description: "Clear memory" },
     ]);
 
     startAlertScheduler().catch((err) => log.error("scheduler.crashed", { err: safeErr(err) }));

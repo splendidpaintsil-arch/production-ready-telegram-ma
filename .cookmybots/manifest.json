@@ -373,5 +373,25 @@
       ],
       "notes": "Works with MongoDB or in-memory fallback."
     }
-  ]
+  ],
+  "runStatuses": {
+    "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp": {
+      "phase": "editing",
+      "stage": "chat",
+      "runId": "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp",
+      "lastUserMessage": "The bot should predict on live real market chart it should not be only one currency pair",
+      "startedAt": "2026-05-18T02:51:49.486Z",
+      "updatedAt": "2026-05-18T02:57:23.796Z",
+      "message": "Preparing workspace for safe edits…"
+    }
+  },
+  "runStatus": {
+    "phase": "editing",
+    "stage": "chat",
+    "runId": "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp",
+    "lastUserMessage": "The bot should predict on live real market chart it should not be only one currency pair",
+    "startedAt": "2026-05-18T02:51:49.486Z",
+    "updatedAt": "2026-05-18T02:57:23.796Z",
+    "message": "Preparing workspace for safe edits…"
+  }
 }

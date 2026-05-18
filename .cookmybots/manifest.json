@@ -1,0 +1,377 @@
+{
+  "projectId": "a5919d93-b1d1-4bc5-957a-98144619645e",
+  "commands": [
+    {
+      "command": "/admin",
+      "description": "Shows admin status and system metrics when authorized.",
+      "usage": "/admin",
+      "examples": [
+        "User: /admin → Bot: stats if Telegram ID is authorized"
+      ],
+      "example": "User: /admin → Bot: stats if Telegram ID is authorized",
+      "notes": "Requires ADMIN_TELEGRAM_IDS. Disabled safely when missing."
+    },
+    {
+      "command": "/alerts",
+      "description": "Shows alert management options and saved alert count.",
+      "usage": "/alerts",
+      "examples": [
+        "User: /alerts → Bot: alert types and dashboard link"
+      ],
+      "example": "User: /alerts → Bot: alert types and dashboard link",
+      "notes": "Alerts use cooldowns to avoid spam."
+    },
+    {
+      "command": "/assets",
+      "description": "Handler for /assets",
+      "example": "User: /assets → bot replies."
+    },
+    {
+      "command": "/backtest",
+      "description": "Runs a bounded simulation and returns backtest metrics.",
+      "usage": "/backtest EURUSD 1m",
+      "examples": [
+        "User: /backtest BTCUSD 5m → Bot: win rate, drawdown, profit factor, Sharpe-like ratio"
+      ],
+      "example": "User: /backtest BTCUSD 5m → Bot: win rate, drawdown, profit factor, Sharpe-like ratio",
+      "notes": "Simulation does not imply live profitability."
+    },
+    {
+      "command": "/dashboard",
+      "description": "Opens the Telegram Mini App dashboard when a public URL is available.",
+      "usage": "/dashboard",
+      "examples": [
+        "User: /dashboard → Bot: Mini App open button"
+      ],
+      "example": "User: /dashboard → Bot: Mini App open button",
+      "notes": "If no URL is configured, the bot sends a safe setup message."
+    },
+    {
+      "command": "/help",
+      "description": "Lists public commands and explains the educational risk disclaimer.",
+      "usage": "/help",
+      "examples": [
+        "User: /help → Bot: command list and disclaimer"
+      ],
+      "example": "User: /help → Bot: command list and disclaimer",
+      "notes": "All insights are probability-based and not financial advice."
+    },
+    {
+      "command": "/indicators",
+      "description": "Handler for /indicators",
+      "example": "User: /indicators → bot replies."
+    },
+    {
+      "command": "/journal",
+      "description": "Logs a demo trade entry.",
+      "usage": "/journal EURUSD BUY win clean breakout",
+      "examples": [
+        "User: /journal EURUSD SELL loss late entry → Bot: demo journal entry saved"
+      ],
+      "example": "User: /journal EURUSD SELL loss late entry → Bot: demo journal entry saved",
+      "notes": "No real broker execution is connected."
+    },
+    {
+      "command": "/market",
+      "description": "Shows current market overview for an asset and timeframe.",
+      "usage": "/market EURUSD 1m",
+      "examples": [
+        "User: /market BTCUSD 5m → Bot: price, trend, volatility, support, resistance"
+      ],
+      "example": "User: /market BTCUSD 5m → Bot: price, trend, volatility, support, resistance",
+      "notes": "Falls back to clearly labeled demo data if provider data is unavailable."
+    },
+    {
+      "command": "/patterns",
+      "description": "Handler for /patterns",
+      "example": "User: /patterns → bot replies."
+    },
+    {
+      "command": "/reset",
+      "description": "Clears stored memory for the current user and chat.",
+      "usage": "/reset",
+      "examples": [
+        "User: /reset → Bot: memory cleared"
+      ],
+      "example": "User: /reset → Bot: memory cleared",
+      "notes": "Works with MongoDB or in-memory fallback."
+    },
+    {
+      "command": "/risk",
+      "description": "Shows risk percentage, max daily loss, loss stop, cooldown, volatility adjustment, and emotional trading alerts.",
+      "usage": "/risk",
+      "examples": [
+        "User: /risk → Bot: current risk settings"
+      ],
+      "example": "User: /risk → Bot: current risk settings",
+      "notes": "Risk settings are educational safeguards."
+    },
+    {
+      "command": "/signal",
+      "description": "Generates a probability-based BUY, SELL, or NEUTRAL analytical label.",
+      "usage": "/signal EURUSD 1m",
+      "examples": [
+        "User: /signal EURUSD 1m → Bot: confidence, probability, risk, expiration, rationale"
+      ],
+      "example": "User: /signal EURUSD 1m → Bot: confidence, probability, risk, expiration, rationale",
+      "notes": "Labels are analytical only, not trade instructions."
+    },
+    {
+      "command": "/start",
+      "description": "Shows Pocket Signal welcome text, risk disclaimer, and action buttons.",
+      "usage": "/start",
+      "examples": [
+        "User: /start → Bot: welcome, disclaimer, dashboard, quick signal, alerts, help"
+      ],
+      "example": "User: /start → Bot: welcome, disclaimer, dashboard, quick signal, alerts, help",
+      "notes": "Dashboard button requires WEBAPP_PUBLIC_URL, RENDER_EXTERNAL_URL, or PUBLIC_BASE_URL."
+    },
+    {
+      "command": "/strategies",
+      "description": "Lists strategy-builder options and saved/demo strategies.",
+      "usage": "/strategies",
+      "examples": [
+        "User: /strategies → Bot: Balanced RSI MACD rules"
+      ],
+      "example": "User: /strategies → Bot: Balanced RSI MACD rules",
+      "notes": "Use the Mini App for richer strategy-building UI."
+    }
+  ],
+  "aiMessages": [
+    {
+      "role": "user",
+      "content": "# Professional AI Agent Prompt — Pocket Option Market Analysis & Signal Assistant\n\n## Project Overview\n\nBuild a professional AI-powered market analysis and trading signal assistant inspired by the Pocket Option trading experience. The system must focus on:\n\n* Real-time market data analysis\n* Technical indicator aggregation\n* Candlestick pattern recognition\n* Trend probability forecasting\n* Risk management\n* Strategy backtesting\n* Trade journaling\n* Demo/simulation trading mode\n* Clean modern dashboard UI\n\nThe platform must NOT guarantee profits or claim impossible prediction accuracy. The bot should provide probability-based insights and risk-aware trading suggestions.\n\n---\n\n# Core Objectives\n\nCreate a full-stack intelligent trading assistant capable of:\n\n1. Fetching and processing live market data\n2. Analyzing price action in real time\n3. Generating buy/sell signal probabilities\n4. Detecting trend reversals and breakouts\n5. Managing risk using configurable rules\n6. Visualizing charts and indicators\n7. Logging historical trades and performance\n8. Running backtests on historical data\n9. Supporting multiple assets and timeframes\n10. Operating with scalable architecture\n\n---\n\n# Recommended Tech Stack\n\n## Frontend\n\n* React.js or Next.js\n* Tailwind CSS\n* TradingView Charting Library\n* Zustand or Redux for state management\n* Framer Motion for animations\n* WebSocket support for live updates\n\n## Backend\n\n* Node.js + Express OR Python FastAPI\n* WebSocket server for real-time signals\n* REST API architecture\n* JWT authentication\n* Redis caching layer\n* PostgreSQL or MongoDB database\n\n## AI / ML Layer\n\n* Python\n* TensorFlow or PyTorch\n* Scikit-learn\n* Pandas + NumPy\n* XGBoost / LightGBM\n* Prophet for trend forecasting\n\n## Deployment\n\n* Docker\n* Nginx\n* Vercel (frontend)\n* Railway / AWS / DigitalOcean backend\n* GitHub Actions CI/CD\n\n---\n\n# UI/UX Requirements\n\nDesign a modern dark-themed trading dashboard with:\n\n* Smooth animations\n* Glassmorphism cards\n* Real-time updating charts\n* Responsive layout\n* Mobile-first design\n* Multi-panel workspace\n* Professional fintech aesthetics\n\n## Main Dashboard Sections\n\n### 1. Live Market Panel\n\n* Asset selector\n* Current price\n* Candle timer\n* Market volatility indicator\n* Live trend direction\n\n### 2. TradingView Chart Area\n\n* Candlestick charts\n* Multiple timeframe support\n* Drawing tools\n* Indicator overlays\n* Zoom & pan controls\n\n### 3. AI Signal Engine\n\nDisplay:\n\n* Signal direction (BUY / SELL)\n* Confidence score\n* Probability percentage\n* Entry suggestion\n* Suggested expiration time\n* Volatility score\n* Risk level\n\n### 4. Indicator Panel\n\nInclude:\n\n* RSI\n* MACD\n* EMA\n* SMA\n* Bollinger Bands\n* Stochastic RSI\n* VWAP\n* ATR\n* Fibonacci levels\n* Support/resistance zones\n\n### 5. Strategy Builder\n\nAllow users to:\n\n* Combine indicators\n* Set custom conditions\n* Save strategies\n* Run simulations\n* Compare results\n\n### 6. Trade History\n\nInclude:\n\n* Win/loss ratio\n* Accuracy metrics\n* PnL graph\n* Export CSV/PDF\n* Daily analytics\n\n---\n\n# AI Prediction System\n\nBuild a multi-model prediction engine using:\n\n## Data Sources\n\n* OHLC candle data\n* Volume data\n* Trend data\n* Momentum indicators\n* Volatility metrics\n* Historical patterns\n\n## Machine Learning Features\n\nThe AI should:\n\n* Detect trend continuation\n* Detect trend reversals\n* Identify breakout zones\n* Predict short-term directional probability\n* Detect market ranging conditions\n* Adapt to changing volatility\n\n## Suggested Models\n\n* LSTM neural networks\n* Random Forest\n* XGBoost\n* Ensemble learning system\n* Reinforcement learning experiments\n\n## Signal Logic\n\nCombine:\n\n* Technical indicators\n* Candle patterns\n* AI probability scoring\n* Multi-timeframe confirmation\n* Market momentum\n\nSignals should output:\n\n* Direction\n* Confidence level\n* Expected strength\n* Risk classification\n\n---\n\n# Candlestick Pattern Detection\n\nImplement automatic recognition for:\n\n* Doji\n* Hammer\n* Shooting Star\n* Engulfing\n* Morning Star\n* Evening Star\n* Three White Soldiers\n* Three Black Crows\n* Pin Bars\n* Inside Bars\n\nEach detected pattern should:\n\n* Highlight visually on chart\n* Include explanation tooltip\n* Contribute to signal scoring\n\n---\n\n# Risk Management System\n\nCritical requirement.\n\nInclude:\n\n* Stop trading after consecutive losses\n* Maximum daily loss protection\n* Position sizing calculator\n* Adjustable risk percentage\n* Volatility-based risk adjustments\n* Cooldown periods\n* Emotional trading prevention alerts\n\n---\n\n# Backtesting Engine\n\nAllow users to:\n\n* Test strategies on historical data\n* View performance metrics\n* Analyze drawdown\n* Optimize indicators\n* Compare multiple strategies\n* Export results\n\nMetrics:\n\n* Win rate\n* Sharpe ratio\n* Drawdown\n* Profit factor\n* Average trade duration\n* Strategy stability\n\n---\n\n# Authentication System\n\nBuild secure authentication with:\n\n* Email/password login\n* OAuth support\n* JWT sessions\n* Password reset\n* 2FA authentication\n* Session management\n\n---\n\n# Admin Panel\n\nAdmin should be able to:\n\n* Manage users\n* Monitor signals\n* Manage assets\n* View analytics\n* Control AI model updates\n* View system logs\n\n---\n\n# API Features\n\nCreate scalable APIs for:\n\n* Market data\n* Signal generation\n* Trade history\n* Strategy storage\n* Notifications\n* AI prediction endpoints\n\n---\n\n# Notification System\n\nSupport:\n\n* Browser notifications\n* Telegram alerts\n* Email alerts\n* Mobile push notifications\n* Custom signal alerts\n\n---\n\n# Performance Requirements\n\nThe system must:\n\n* Handle thousands of concurrent users\n* Deliver low-latency updates\n* Use WebSockets efficiently\n* Cache market data intelligently\n* Optimize AI inference speed\n\n---\n\n# Security Requirements\n\nImplement:\n\n* Rate limiting\n* API protection\n* SQL injection prevention\n* XSS protection\n* CSRF protection\n* Encrypted credentials\n* Secure environment variables\n\n---\n\n# Mobile App Support\n\nOptional Flutter app with:\n\n* Live signals\n* Chart viewing\n* Push notifications\n* Trade analytics\n* Account synchronization\n\n---\n\n# Suggested Folder Structure\n\n```bash\nproject-root/\n│\n├── frontend/\n├── backend/\n├── ai-engine/\n├── websocket-server/\n├── indicators/\n├── strategies/\n├── backtesting/\n├── database/\n├── docs/\n└── deployment/\n```\n\n---\n\n# Example AI Workflow\n\n1. Fetch live candle data\n2. Compute indicators\n3. Detect patterns\n4. Analyze volatility\n5. Run ML model inference\n6. Aggregate scores\n7. Generate confidence probability\n8. Trigger signal if thresholds are met\n9. Log prediction results\n10. Continuously retrain models\n\n---\n\n# Dashboard Design Style\n\nUse:\n\n* Dark background\n* Neon accents\n* Professional fintech typography\n* Rounded cards\n* Smooth transitions\n* Interactive charts\n* Modern trading aesthetics\n\nColor suggestions:\n\n* Black\n* Deep navy\n* Electric blue\n* Green for bullish\n* Red for bearish\n* Purple highlights\n\n---\n\n# Important Rules\n\n* Never guarantee profits\n* Never claim 100% accuracy\n* Include clear risk warnings\n* Use probability-based language\n* Prioritize educational and analytical value\n* Make architecture modular and scalable\n\n---\n\n# Deliverables\n\nThe AI agent should generate:\n\n1. Full frontend code\n2. Full backend code\n3. AI prediction engine\n4. Database schema\n5. API documentation\n6. WebSocket implementation\n7. Responsive UI\n8. Backtesting module\n9. Authentication system\n10. Deployment configuration\n11. Docker setup\n12. Environment variable examples\n13. README documentation\n14. Sample trading strategies\n15. Unit and integration tests\n\n---\n\n# Final Goal\n\nBuild a professional-grade AI-powered trading analytics platform with real-time market intelligence, predictive modeling, advanced charting, and institutional-quality user experience focused on probability-driven decision support rather than guaranteed outcomes."
+    },
+    {
+      "role": "assistant",
+      "content": "Built Pocket Signal as a single-process Telegram bot plus Mini App service with commands, market analysis, AI-gated explanations, MongoDB-safe storage, demo fallback data, admin gating, scheduler logs, docs, and deploy scripts.\n\nFiles touched (30): .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+    }
+  ],
+  "createdBy": "6a0a70949f1841f749751ac5",
+  "source": "ai-cold-start",
+  "description": "",
+  "platform": "telegram",
+  "usesWebApp": false,
+  "telegramKind": "bot",
+  "planMarkdown": "Bot: Production-ready Telegram market analysis and signal assistant\n\nSummary:\nDesign a single-process Node.js ESM Telegram bot using grammY that delivers probability-based market analysis, technical indicator summaries, candlestick pattern detection, risk-aware signal suggestions, trade journaling, demo tracking, alerts, and lightweight backtesting.\n\nThe bot is not a trading execution system and must not claim guaranteed profits or certain predictions. Its product position is educational decision support: it helps users interpret market conditions, compare strategies, manage risk rules, and record outcomes. Every signal should include confidence, invalidation context, volatility risk, and a clear reminder that users are responsible for their own decisions.\n\nProduct goals:\nThe goal is to convert a broad trading analytics idea into a practical Telegram-first product that can be built and operated as one Node.js service.\n\n1) Provide market snapshots for selected assets and timeframes, including price, candle status, volatility, trend direction, and key indicator readings.\n\n2) Generate probability-based BUY, SELL, or WAIT analysis using a transparent scoring engine that combines indicators, candlestick patterns, support and resistance, volatility, and multi-timeframe confirmation.\n\n3) Help users avoid impulsive trading through configurable risk controls such as maximum daily loss, consecutive-loss cooldowns, risk percentage limits, and session reminders.\n\n4) Support strategy experimentation through saved rule sets and backtests against stored or fetched historical candle data.\n\n5) Maintain a trade journal where users can manually log demo or real trades, attach the signal that influenced the decision, and review performance metrics.\n\n6) Keep the experience Telegram-native: commands, inline keyboards, scheduled alerts, chart images, compact summaries, and admin controls inside the bot.\n\n7) Build for honesty and compliance: no profit guarantees, no 100 percent accuracy claims, no automatic broker execution, and no language implying personalized financial advice.\n\nHigh-level architecture:\nThe system runs as a single Node.js ESM process. It contains modular internal components rather than separate services. This keeps operations simple while still allowing clean separation of responsibilities.\n\n1) Telegram interface layer: grammY handles commands, conversations, inline keyboards, callback queries, admin actions, rate limits, and user onboarding. The bot token is read from TELEGRAMBOTTOKEN in environment variables.\n\n2) User and permissions layer: Telegram user ID is the primary identity. The bot stores user preferences, risk profile, watched assets, alert settings, strategy definitions, and journal entries. Admin access is controlled by a configured allowlist of Telegram user IDs.\n\n3) Market data adapter layer: a generic external market data provider is queried for OHLCV candles, current quotes, and historical candles. The adapter normalizes all data into one internal candle format so the rest of the bot is independent from provider-specific response shapes.\n\n4) Candle cache and scheduler: in-memory maps hold recent candles, latest signals, and active subscriptions to reduce duplicate calls. A scheduler refreshes watched assets and timeframes at safe intervals, persists important snapshots to MongoDB, and dispatches alerts when user thresholds are met.\n\n5) Indicator engine: computes RSI, MACD, EMA, SMA, Bollinger Bands, Stochastic RSI, VWAP where available, ATR, volatility regime, trend slope, and support/resistance zones. Calculations are deterministic, testable, and versioned.\n\n6) Pattern recognition engine: detects Doji, Hammer, Shooting Star, Engulfing, Morning Star, Evening Star, Three White Soldiers, Three Black Crows, Pin Bars, and Inside Bars. Each pattern returns direction bias, strength, reliability context, and a short human explanation.\n\n7) Signal scoring engine: combines indicator scores, pattern scores, volatility filters, trend alignment, multi-timeframe confirmation, and risk context. The output is BUY, SELL, or WAIT with confidence percentage, probability band, expiration suggestion, invalidation zone, volatility score, and risk level. WAIT is a first-class result when conditions are unclear.\n\n8) Risk engine: evaluates user limits before sending actionable alerts. It checks max daily loss, consecutive losses, cooldown status, selected risk percentage, volatility adjustment, and whether the user is overtrading.\n\n9) Backtesting module: runs saved strategies over historical candles inside the same process. Jobs should be bounded by timeframe, candle count, and user tier to avoid blocking the bot. Long backtests can be chunked and progress updates sent through Telegram messages.\n\n10) Trade journal and analytics: stores manually entered trades, entry and exit data, asset, timeframe, direction, expiration or duration, result, notes, and related signal ID. Analytics include win rate, average outcome, drawdown estimate, profit factor, streaks, asset breakdown, and strategy comparison.\n\n11) Chart rendering and reports: the bot can generate simple chart images with candles, overlays, support/resistance, and highlighted patterns. Images are stored temporarily in simple filesystem storage or object storage, then sent to users through Telegram.\n\n12) Admin operations: admins can manage supported assets, view system status, inspect signal statistics, pause alerts, review data provider health, and broadcast risk notices or maintenance messages.\n\nData model:\nMongoDB is the recommended persistence layer because the bot needs user settings, strategies, journals, signals, historical candles, and backtest results. Small deployments can keep volatile caches in memory, but production should persist all user-facing state.\n\n1) users: telegramUserId, username, firstSeenAt, lastSeenAt, locale, role, onboardingStatus, acceptedRiskDisclaimerAt, defaultAsset, defaultTimeframe, notificationSettings, createdAt, updatedAt.\n\n2) riskProfiles: telegramUserId, maxDailyLossAmount, maxDailyLossPercent, maxConsecutiveLosses, cooldownMinutes, riskPerTradePercent, maxSignalsPerDay, volatilitySensitivity, demoModeDefault, updatedAt.\n\n3) assets: symbol, displayName, marketType, quoteCurrency, isActive, allowedTimeframes, precision, providerMapping, tradingHours, createdAt, updatedAt.\n\n4) candles: symbol, timeframe, openTime, closeTime, open, high, low, close, volume, source, completeness, createdAt. A uniqueness rule should exist for symbol plus timeframe plus openTime.\n\n5) indicatorSnapshots: symbol, timeframe, candleTime, indicators, trendState, volatilityState, supportResistanceZones, engineVersion, createdAt.\n\n6) detectedPatterns: symbol, timeframe, candleTime, patternName, directionBias, strength, explanation, engineVersion, createdAt.\n\n7) signals: telegramUserId when user-specific or null for global, symbol, timeframe, generatedAt, direction, confidence, probabilityBand, entryReference, expirationSuggestion, invalidationZone, riskLevel, volatilityScore, reasons, warnings, engineVersion, outcomeStatus.\n\n8) strategies: telegramUserId, name, description, assetScope, timeframeScope, rules, riskRules, isActive, createdAt, updatedAt. Rules should be stored as structured conditions rather than arbitrary executable code.\n\n9) backtests: telegramUserId, strategyId, symbol, timeframe, dateRange, assumptions, status, progress, metrics, trades, startedAt, completedAt, errorMessage.\n\n10) journalTrades: telegramUserId, mode, symbol, timeframe, direction, entryPrice, exitPrice, stakeAmount, resultAmount, resultStatus, openedAt, closedAt, signalId, strategyId, notes, tags, createdAt.\n\n11) alerts: telegramUserId, symbol, timeframe, alertType, conditions, isActive, lastTriggeredAt, cooldownUntil, createdAt, updatedAt.\n\n12) auditEvents: actorTelegramUserId, eventType, targetType, targetId, details, createdAt. This supports admin accountability and troubleshooting.\n\n13) systemState: key, value, updatedAt. This can hold provider health, maintenance mode, engine versions, and scheduler checkpoints.\n\nKey flows:\n1) Onboarding flow: the user starts the bot, accepts a clear risk disclaimer, chooses preferred assets and timeframes, configures basic risk settings, and receives a short guide explaining that all outputs are probability-based educational analysis.\n\n2) Market snapshot flow: the user requests an asset. The bot fetches or reads cached candles, computes indicators, detects patterns, determines market state, and returns a compact Telegram card with price, trend, volatility, RSI, MACD status, support/resistance, and whether conditions favor BUY, SELL, or WAIT.\n\n3) Signal generation flow: the user runs a signal command or has alerts enabled. The signal engine evaluates recent candles, indicator alignment, patterns, volatility, and multi-timeframe confirmation. The risk engine then adjusts the final recommendation. The bot responds with direction, confidence, probability band, suggested expiration window, risk classification, invalidation context, and reasons.\n\n4) Alert flow: the scheduler refreshes watched markets. If an alert condition is met, the bot verifies cooldowns, user risk limits, and duplicate suppression. It sends a Telegram notification only if the signal is still valid and useful. Alerts should never spam users during noisy markets.\n\n5) Strategy builder flow: the user selects indicators and conditions through commands and inline keyboards. Example conditions include RSI below a threshold, EMA trend alignment, MACD crossover, ATR volatility filter, candlestick confirmation, and higher-timeframe trend agreement. The strategy is saved as structured data.\n\n6) Backtesting flow: the user chooses a saved strategy, asset, timeframe, and date range. The bot loads historical candles, simulates entries and exits under configured assumptions, calculates metrics, and returns a summary. The result must include limitations such as spread, slippage, delayed execution, and historical bias.\n\n7) Trade journal flow: after a trade, the user logs direction, entry, exit, stake, result, notes, and whether it was demo or real. The bot updates performance analytics and warns the user if risk rules are being violated.\n\n8) Demo mode flow: the user can simulate trades without broker execution. The bot tracks virtual balance, active demo positions, expirations, outcomes, and statistics. This is useful for learning strategy behavior without financial exposure.\n\n9) Admin flow: an admin checks status, pauses alerts during provider issues, enables or disables assets, reviews aggregate signal performance, and audits system events.\n\n10) Safety flow: when the bot detects consecutive losses, daily loss limit breach, high volatility, or excessive signal requests, it recommends cooldowns and can suppress alerts according to the user’s configured risk profile.\n\nTech stack:\nThe production design must stay within a simple single-service architecture.\n\n1) Runtime: Node.js using ESM modules.\n\n2) Telegram framework: grammY for bot commands, conversations, inline keyboards, callback queries, middleware, and error handling.\n\n3) Bot token: TELEGRAMBOTTOKEN from environment variables.\n\n4) Persistence: MongoDB for users, assets, candles, signals, strategies, backtests, journal entries, alerts, and audit events. In-memory maps may be used only for short-lived caches, scheduler state, duplicate suppression, and active conversation state.\n\n5) Market data: generic external market data APIs accessed by internal adapter modules. Provider-specific details are isolated behind a normalized candle and quote interface.\n\n6) Scheduling: in-process timers or a Node scheduling library inside the same service. Jobs must be bounded, observable, and safe to restart.\n\n7) Charts and files: generated chart images, exports, and reports can be stored in object storage or simple filesystem storage. The design should not depend on a vendor-specific storage product.\n\n8) Deployment: a Node.js server in the cloud running one bot service process. Configuration is supplied through environment variables. No additional database or messaging infrastructure is required beyond MongoDB.\n\n9) Security: Telegram identity for authentication, admin Telegram ID allowlist, environment variables for secrets, input validation, command rate limiting, safe strategy rule storage, no arbitrary user code execution, and careful logging that avoids sensitive data.\n\n10) AI approach: start with an explainable scoring engine built in Node.js using technical indicators, pattern recognition, volatility regimes, and historical outcome calibration. Any model-like behavior should be versioned, measured, and explainable to users. Avoid unsupported claims of predictive certainty.\n\nNon-functional requirements:\n1) Reliability: the bot should handle provider failures gracefully by returning cached context when safe, marking data as stale, and avoiding signal generation when market data quality is poor.\n\n2) Performance: recent candles and computed snapshots should be cached in memory to reduce repeated calls. The scheduler should group users by watched symbol and timeframe so one market update can serve many users.\n\n3) Latency: command responses should acknowledge quickly. Heavier work such as backtests and exports should send progress messages and final results rather than blocking the user experience.\n\n4) Scalability within one process: avoid per-user polling where possible. Use shared market refresh jobs, deduplicate alerts, cap backtest sizes, and apply command-level rate limits.\n\n5) Data integrity: candle data should be normalized, deduplicated, and tagged by source and completeness. Signal outputs should store engine version and reasons so future performance reviews are meaningful.\n\n6) Observability: log command usage, provider errors, scheduler runs, signal counts, alert delivery, backtest duration, and unhandled exceptions. Admin status commands should expose health summaries without leaking secrets.\n\n7) Security: validate all command inputs, sanitize notes and export fields, prevent oversized payloads, restrict admin commands, and keep secrets out of messages and logs.\n\n8) Risk and compliance: every signal should contain a risk warning. The bot should avoid language such as guaranteed, certain, risk-free, or always profitable. It should clearly state that markets are volatile and users can lose money.\n\n9) Testing: unit test indicator calculations, pattern detection, strategy rules, risk checks, and signal scoring. Integration test Telegram command flows using mocked market data. Backtest known scenarios to prevent regressions.\n\n10) Maintainability: keep engines modular, version signal logic, document assumptions, and make assets, timeframes, thresholds, and risk defaults configurable without rewriting core logic.\n\nBot commands:\n• start — Begin onboarding, accept the risk disclaimer, choose default assets and timeframes, and create a user profile. (usage: /start) [onboarding]\n• help — Show available commands, examples, and a short explanation of how probability-based signals should be interpreted. (usage: /help) [support]\n• disclaimer — Display the trading risk disclaimer and explain that the bot provides educational analysis, not guaranteed outcomes. (usage: /disclaimer) [safety]\n• assets — List supported assets and available timeframes. (usage: /assets) [market]\n• watch — Add an asset and timeframe to the user’s watchlist for snapshots and optional alerts. (usage: /watch EURUSD 1m) [market]\n• unwatch — Remove an asset and timeframe from the user’s watchlist. (usage: /unwatch EURUSD 1m) [market]\n• market — Get a current market snapshot with price, trend, volatility, support and resistance, and indicator summary. (usage: /market EURUSD 1m) [analysis]\n• signal — Generate a probability-based BUY, SELL, or WAIT analysis with confidence, reasons, risk level, and invalidation context. (usage: /signal EURUSD 1m) [analysis]\n• chart — Send a chart image with recent candles, key overlays, support and resistance, and detected patterns. (usage: /chart EURUSD 5m) [analysis]\n• indicators — Show detailed indicator readings such as RSI, MACD, EMA, SMA, Bollinger Bands, Stochastic RSI, VWAP, and ATR. (usage: /indicators EURUSD 1m) [analysis]\n• patterns — Show recently detected candlestick patterns with direction bias, strength, and plain-language explanation. (usage: /patterns EURUSD 1m) [analysis]\n• risk — View or update risk settings such as max daily loss, consecutive-loss limit, cooldown, and risk per trade. (usage: /risk) [risk]\n• alerts — Create, list, pause, or delete signal and market-condition alerts. (usage: /alerts) [notifications]\n• strategy — Create, edit, list, or inspect saved strategies built from structured indicator and pattern conditions. (usage: /strategy) [strategy]\n• backtest — Run a bounded historical simulation for a saved strategy and receive performance metrics and limitations. (usage: /backtest strategyname EURUSD 5m 30d) [strategy]\n• journal — Log a demo or real trade manually, attach notes, and optionally link it to a generated signal. (usage: /journal) [journal]\n• performance — Review journal analytics including win rate, streaks, drawdown estimate, asset breakdown, and strategy comparison. (usage: /performance 30d) [journal]\n• demo — Enable or manage demo tracking with virtual balance, simulated trades, and practice performance statistics. (usage: /demo) [simulation]\n• export — Export journal entries, backtest results, or signal history as a report file when available. (usage: /export journal 30d) [reports]\n• settings — Manage default asset, timeframe, notification preferences, timezone, and display options. (usage: /settings) [account]\n• admin — Admin-only control panel for assets, system health, alert pause mode, provider status, and audit summaries. (usage: /admin) [admin]\n",
+  "planSections": {
+    "productGoals": "The goal is to convert a broad trading analytics idea into a practical Telegram-first product that can be built and operated as one Node.js service.\n\n1) Provide market snapshots for selected assets and timeframes, including price, candle status, volatility, trend direction, and key indicator readings.\n\n2) Generate probability-based BUY, SELL, or WAIT analysis using a transparent scoring engine that combines indicators, candlestick patterns, support and resistance, volatility, and multi-timeframe confirmation.\n\n3) Help users avoid impulsive trading through configurable risk controls such as maximum daily loss, consecutive-loss cooldowns, risk percentage limits, and session reminders.\n\n4) Support strategy experimentation through saved rule sets and backtests against stored or fetched historical candle data.\n\n5) Maintain a trade journal where users can manually log demo or real trades, attach the signal that influenced the decision, and review performance metrics.\n\n6) Keep the experience Telegram-native: commands, inline keyboards, scheduled alerts, chart images, compact summaries, and admin controls inside the bot.\n\n7) Build for honesty and compliance: no profit guarantees, no 100 percent accuracy claims, no automatic broker execution, and no language implying personalized financial advice.",
+    "highLevelArchitecture": "The system runs as a single Node.js ESM process. It contains modular internal components rather than separate services. This keeps operations simple while still allowing clean separation of responsibilities.\n\n1) Telegram interface layer: grammY handles commands, conversations, inline keyboards, callback queries, admin actions, rate limits, and user onboarding. The bot token is read from TELEGRAMBOTTOKEN in environment variables.\n\n2) User and permissions layer: Telegram user ID is the primary identity. The bot stores user preferences, risk profile, watched assets, alert settings, strategy definitions, and journal entries. Admin access is controlled by a configured allowlist of Telegram user IDs.\n\n3) Market data adapter layer: a generic external market data provider is queried for OHLCV candles, current quotes, and historical candles. The adapter normalizes all data into one internal candle format so the rest of the bot is independent from provider-specific response shapes.\n\n4) Candle cache and scheduler: in-memory maps hold recent candles, latest signals, and active subscriptions to reduce duplicate calls. A scheduler refreshes watched assets and timeframes at safe intervals, persists important snapshots to MongoDB, and dispatches alerts when user thresholds are met.\n\n5) Indicator engine: computes RSI, MACD, EMA, SMA, Bollinger Bands, Stochastic RSI, VWAP where available, ATR, volatility regime, trend slope, and support/resistance zones. Calculations are deterministic, testable, and versioned.\n\n6) Pattern recognition engine: detects Doji, Hammer, Shooting Star, Engulfing, Morning Star, Evening Star, Three White Soldiers, Three Black Crows, Pin Bars, and Inside Bars. Each pattern returns direction bias, strength, reliability context, and a short human explanation.\n\n7) Signal scoring engine: combines indicator scores, pattern scores, volatility filters, trend alignment, multi-timeframe confirmation, and risk context. The output is BUY, SELL, or WAIT with confidence percentage, probability band, expiration suggestion, invalidation zone, volatility score, and risk level. WAIT is a first-class result when conditions are unclear.\n\n8) Risk engine: evaluates user limits before sending actionable alerts. It checks max daily loss, consecutive losses, cooldown status, selected risk percentage, volatility adjustment, and whether the user is overtrading.\n\n9) Backtesting module: runs saved strategies over historical candles inside the same process. Jobs should be bounded by timeframe, candle count, and user tier to avoid blocking the bot. Long backtests can be chunked and progress updates sent through Telegram messages.\n\n10) Trade journal and analytics: stores manually entered trades, entry and exit data, asset, timeframe, direction, expiration or duration, result, notes, and related signal ID. Analytics include win rate, average outcome, drawdown estimate, profit factor, streaks, asset breakdown, and strategy comparison.\n\n11) Chart rendering and reports: the bot can generate simple chart images with candles, overlays, support/resistance, and highlighted patterns. Images are stored temporarily in simple filesystem storage or object storage, then sent to users through Telegram.\n\n12) Admin operations: admins can manage supported assets, view system status, inspect signal statistics, pause alerts, review data provider health, and broadcast risk notices or maintenance messages.",
+    "dataModel": "MongoDB is the recommended persistence layer because the bot needs user settings, strategies, journals, signals, historical candles, and backtest results. Small deployments can keep volatile caches in memory, but production should persist all user-facing state.\n\n1) users: telegramUserId, username, firstSeenAt, lastSeenAt, locale, role, onboardingStatus, acceptedRiskDisclaimerAt, defaultAsset, defaultTimeframe, notificationSettings, createdAt, updatedAt.\n\n2) riskProfiles: telegramUserId, maxDailyLossAmount, maxDailyLossPercent, maxConsecutiveLosses, cooldownMinutes, riskPerTradePercent, maxSignalsPerDay, volatilitySensitivity, demoModeDefault, updatedAt.\n\n3) assets: symbol, displayName, marketType, quoteCurrency, isActive, allowedTimeframes, precision, providerMapping, tradingHours, createdAt, updatedAt.\n\n4) candles: symbol, timeframe, openTime, closeTime, open, high, low, close, volume, source, completeness, createdAt. A uniqueness rule should exist for symbol plus timeframe plus openTime.\n\n5) indicatorSnapshots: symbol, timeframe, candleTime, indicators, trendState, volatilityState, supportResistanceZones, engineVersion, createdAt.\n\n6) detectedPatterns: symbol, timeframe, candleTime, patternName, directionBias, strength, explanation, engineVersion, createdAt.\n\n7) signals: telegramUserId when user-specific or null for global, symbol, timeframe, generatedAt, direction, confidence, probabilityBand, entryReference, expirationSuggestion, invalidationZone, riskLevel, volatilityScore, reasons, warnings, engineVersion, outcomeStatus.\n\n8) strategies: telegramUserId, name, description, assetScope, timeframeScope, rules, riskRules, isActive, createdAt, updatedAt. Rules should be stored as structured conditions rather than arbitrary executable code.\n\n9) backtests: telegramUserId, strategyId, symbol, timeframe, dateRange, assumptions, status, progress, metrics, trades, startedAt, completedAt, errorMessage.\n\n10) journalTrades: telegramUserId, mode, symbol, timeframe, direction, entryPrice, exitPrice, stakeAmount, resultAmount, resultStatus, openedAt, closedAt, signalId, strategyId, notes, tags, createdAt.\n\n11) alerts: telegramUserId, symbol, timeframe, alertType, conditions, isActive, lastTriggeredAt, cooldownUntil, createdAt, updatedAt.\n\n12) auditEvents: actorTelegramUserId, eventType, targetType, targetId, details, createdAt. This supports admin accountability and troubleshooting.\n\n13) systemState: key, value, updatedAt. This can hold provider health, maintenance mode, engine versions, and scheduler checkpoints.",
+    "keyFlows": "1) Onboarding flow: the user starts the bot, accepts a clear risk disclaimer, chooses preferred assets and timeframes, configures basic risk settings, and receives a short guide explaining that all outputs are probability-based educational analysis.\n\n2) Market snapshot flow: the user requests an asset. The bot fetches or reads cached candles, computes indicators, detects patterns, determines market state, and returns a compact Telegram card with price, trend, volatility, RSI, MACD status, support/resistance, and whether conditions favor BUY, SELL, or WAIT.\n\n3) Signal generation flow: the user runs a signal command or has alerts enabled. The signal engine evaluates recent candles, indicator alignment, patterns, volatility, and multi-timeframe confirmation. The risk engine then adjusts the final recommendation. The bot responds with direction, confidence, probability band, suggested expiration window, risk classification, invalidation context, and reasons.\n\n4) Alert flow: the scheduler refreshes watched markets. If an alert condition is met, the bot verifies cooldowns, user risk limits, and duplicate suppression. It sends a Telegram notification only if the signal is still valid and useful. Alerts should never spam users during noisy markets.\n\n5) Strategy builder flow: the user selects indicators and conditions through commands and inline keyboards. Example conditions include RSI below a threshold, EMA trend alignment, MACD crossover, ATR volatility filter, candlestick confirmation, and higher-timeframe trend agreement. The strategy is saved as structured data.\n\n6) Backtesting flow: the user chooses a saved strategy, asset, timeframe, and date range. The bot loads historical candles, simulates entries and exits under configured assumptions, calculates metrics, and returns a summary. The result must include limitations such as spread, slippage, delayed execution, and historical bias.\n\n7) Trade journal flow: after a trade, the user logs direction, entry, exit, stake, result, notes, and whether it was demo or real. The bot updates performance analytics and warns the user if risk rules are being violated.\n\n8) Demo mode flow: the user can simulate trades without broker execution. The bot tracks virtual balance, active demo positions, expirations, outcomes, and statistics. This is useful for learning strategy behavior without financial exposure.\n\n9) Admin flow: an admin checks status, pauses alerts during provider issues, enables or disables assets, reviews aggregate signal performance, and audits system events.\n\n10) Safety flow: when the bot detects consecutive losses, daily loss limit breach, high volatility, or excessive signal requests, it recommends cooldowns and can suppress alerts according to the user’s configured risk profile.",
+    "techStack": "The production design must stay within a simple single-service architecture.\n\n1) Runtime: Node.js using ESM modules.\n\n2) Telegram framework: grammY for bot commands, conversations, inline keyboards, callback queries, middleware, and error handling.\n\n3) Bot token: TELEGRAMBOTTOKEN from environment variables.\n\n4) Persistence: MongoDB for users, assets, candles, signals, strategies, backtests, journal entries, alerts, and audit events. In-memory maps may be used only for short-lived caches, scheduler state, duplicate suppression, and active conversation state.\n\n5) Market data: generic external market data APIs accessed by internal adapter modules. Provider-specific details are isolated behind a normalized candle and quote interface.\n\n6) Scheduling: in-process timers or a Node scheduling library inside the same service. Jobs must be bounded, observable, and safe to restart.\n\n7) Charts and files: generated chart images, exports, and reports can be stored in object storage or simple filesystem storage. The design should not depend on a vendor-specific storage product.\n\n8) Deployment: a Node.js server in the cloud running one bot service process. Configuration is supplied through environment variables. No additional database or messaging infrastructure is required beyond MongoDB.\n\n9) Security: Telegram identity for authentication, admin Telegram ID allowlist, environment variables for secrets, input validation, command rate limiting, safe strategy rule storage, no arbitrary user code execution, and careful logging that avoids sensitive data.\n\n10) AI approach: start with an explainable scoring engine built in Node.js using technical indicators, pattern recognition, volatility regimes, and historical outcome calibration. Any model-like behavior should be versioned, measured, and explainable to users. Avoid unsupported claims of predictive certainty.",
+    "nonFunctional": "1) Reliability: the bot should handle provider failures gracefully by returning cached context when safe, marking data as stale, and avoiding signal generation when market data quality is poor.\n\n2) Performance: recent candles and computed snapshots should be cached in memory to reduce repeated calls. The scheduler should group users by watched symbol and timeframe so one market update can serve many users.\n\n3) Latency: command responses should acknowledge quickly. Heavier work such as backtests and exports should send progress messages and final results rather than blocking the user experience.\n\n4) Scalability within one process: avoid per-user polling where possible. Use shared market refresh jobs, deduplicate alerts, cap backtest sizes, and apply command-level rate limits.\n\n5) Data integrity: candle data should be normalized, deduplicated, and tagged by source and completeness. Signal outputs should store engine version and reasons so future performance reviews are meaningful.\n\n6) Observability: log command usage, provider errors, scheduler runs, signal counts, alert delivery, backtest duration, and unhandled exceptions. Admin status commands should expose health summaries without leaking secrets.\n\n7) Security: validate all command inputs, sanitize notes and export fields, prevent oversized payloads, restrict admin commands, and keep secrets out of messages and logs.\n\n8) Risk and compliance: every signal should contain a risk warning. The bot should avoid language such as guaranteed, certain, risk-free, or always profitable. It should clearly state that markets are volatile and users can lose money.\n\n9) Testing: unit test indicator calculations, pattern detection, strategy rules, risk checks, and signal scoring. Integration test Telegram command flows using mocked market data. Backtest known scenarios to prevent regressions.\n\n10) Maintainability: keep engines modular, version signal logic, document assumptions, and make assets, timeframes, thresholds, and risk defaults configurable without rewriting core logic."
+  },
+  "envVarDocs": [
+    {
+      "key": "TELEGRAM_BOT_TOKEN",
+      "title": "Telegram Bot Token",
+      "description": "Required token used by grammY to run the Telegram bot.",
+      "usage": "Read by src/lib/config.js and required at boot.",
+      "howToGet": "Create a bot with BotFather on Telegram.",
+      "example": "123456789:ABCDEF...",
+      "isSecret": true,
+      "required": true
+    },
+    {
+      "key": "PORT",
+      "title": "HTTP Port",
+      "description": "Port for the single Node service that hosts the bot APIs and Mini App.",
+      "usage": "Express listens on this port.",
+      "example": "3000",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "MONGODB_URI",
+      "title": "MongoDB URI",
+      "description": "Optional MongoDB connection string for users, settings, assets, strategies, alerts, trades, backtests, signals, risk settings, system logs, and memory.",
+      "usage": "If missing, the bot runs in limited in-memory demo mode.",
+      "example": "mongodb+srv://user:pass@cluster/db",
+      "isSecret": true,
+      "required": false
+    },
+    {
+      "key": "COOKMYBOTS_AI_ENDPOINT",
+      "title": "CookMyBots AI Endpoint",
+      "description": "Base URL for the CookMyBots AI Gateway. Do not include /chat.",
+      "usage": "AI explanations call POST {endpoint}/chat.",
+      "example": "https://api.cookmybots.com/api/ai",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "COOKMYBOTS_AI_KEY",
+      "title": "CookMyBots AI Key",
+      "description": "Optional key for AI explanations through CookMyBots AI Gateway.",
+      "usage": "Sent as Authorization: Bearer for AI calls. Never logged.",
+      "example": "cmb_ai_...",
+      "isSecret": true,
+      "required": false
+    },
+    {
+      "key": "MARKET_DATA_API_KEY",
+      "title": "Market Data API Key",
+      "description": "Optional generic market data provider key for OHLC candles.",
+      "usage": "If missing or provider fails, demo/delayed sample data is used and labeled.",
+      "example": "provider-key-format",
+      "isSecret": true,
+      "required": false
+    },
+    {
+      "key": "WEBAPP_PUBLIC_URL",
+      "title": "Web App Public URL",
+      "description": "Optional public URL used for Telegram Mini App launch buttons.",
+      "usage": "If missing, the bot falls back to Render/PUBLIC_BASE_URL when available, otherwise shows a safe setup message.",
+      "example": "https://your-service.onrender.com/app",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "ADMIN_TELEGRAM_IDS",
+      "title": "Admin Telegram IDs",
+      "description": "Comma-separated Telegram user IDs allowed to access admin features.",
+      "usage": "If missing, admin features are disabled safely.",
+      "example": "123456789,987654321",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "AI_TIMEOUT_MS",
+      "title": "AI Timeout",
+      "description": "Optional AI gateway timeout in milliseconds.",
+      "usage": "Defaults to 600000 for long-running AI calls.",
+      "example": "600000",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "AI_MAX_RETRIES",
+      "title": "AI Retries",
+      "description": "Optional retry count for transient AI gateway failures.",
+      "usage": "Defaults to 2.",
+      "example": "2",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "CONCURRENCY",
+      "title": "Concurrency",
+      "description": "Optional concurrency setting kept for operational tuning.",
+      "usage": "Defaults to 20; Telegram runner remains conservative for AI safety.",
+      "example": "20",
+      "isSecret": false,
+      "required": false
+    }
+  ],
+  "commandDocs": [
+    {
+      "command": "/start",
+      "description": "Shows Pocket Signal welcome text, risk disclaimer, and action buttons.",
+      "usage": "/start",
+      "examples": [
+        "User: /start → Bot: welcome, disclaimer, dashboard, quick signal, alerts, help"
+      ],
+      "notes": "Dashboard button requires WEBAPP_PUBLIC_URL, RENDER_EXTERNAL_URL, or PUBLIC_BASE_URL."
+    },
+    {
+      "command": "/help",
+      "description": "Lists public commands and explains the educational risk disclaimer.",
+      "usage": "/help",
+      "examples": [
+        "User: /help → Bot: command list and disclaimer"
+      ],
+      "notes": "All insights are probability-based and not financial advice."
+    },
+    {
+      "command": "/dashboard",
+      "description": "Opens the Telegram Mini App dashboard when a public URL is available.",
+      "usage": "/dashboard",
+      "examples": [
+        "User: /dashboard → Bot: Mini App open button"
+      ],
+      "notes": "If no URL is configured, the bot sends a safe setup message."
+    },
+    {
+      "command": "/market",
+      "description": "Shows current market overview for an asset and timeframe.",
+      "usage": "/market EURUSD 1m",
+      "examples": [
+        "User: /market BTCUSD 5m → Bot: price, trend, volatility, support, resistance"
+      ],
+      "notes": "Falls back to clearly labeled demo data if provider data is unavailable."
+    },
+    {
+      "command": "/signal",
+      "description": "Generates a probability-based BUY, SELL, or NEUTRAL analytical label.",
+      "usage": "/signal EURUSD 1m",
+      "examples": [
+        "User: /signal EURUSD 1m → Bot: confidence, probability, risk, expiration, rationale"
+      ],
+      "notes": "Labels are analytical only, not trade instructions."
+    },
+    {
+      "command": "/alerts",
+      "description": "Shows alert management options and saved alert count.",
+      "usage": "/alerts",
+      "examples": [
+        "User: /alerts → Bot: alert types and dashboard link"
+      ],
+      "notes": "Alerts use cooldowns to avoid spam."
+    },
+    {
+      "command": "/journal",
+      "description": "Logs a demo trade entry.",
+      "usage": "/journal EURUSD BUY win clean breakout",
+      "examples": [
+        "User: /journal EURUSD SELL loss late entry → Bot: demo journal entry saved"
+      ],
+      "notes": "No real broker execution is connected."
+    },
+    {
+      "command": "/risk",
+      "description": "Shows risk percentage, max daily loss, loss stop, cooldown, volatility adjustment, and emotional trading alerts.",
+      "usage": "/risk",
+      "examples": [
+        "User: /risk → Bot: current risk settings"
+      ],
+      "notes": "Risk settings are educational safeguards."
+    },
+    {
+      "command": "/backtest",
+      "description": "Runs a bounded simulation and returns backtest metrics.",
+      "usage": "/backtest EURUSD 1m",
+      "examples": [
+        "User: /backtest BTCUSD 5m → Bot: win rate, drawdown, profit factor, Sharpe-like ratio"
+      ],
+      "notes": "Simulation does not imply live profitability."
+    },
+    {
+      "command": "/strategies",
+      "description": "Lists strategy-builder options and saved/demo strategies.",
+      "usage": "/strategies",
+      "examples": [
+        "User: /strategies → Bot: Balanced RSI MACD rules"
+      ],
+      "notes": "Use the Mini App for richer strategy-building UI."
+    },
+    {
+      "command": "/admin",
+      "description": "Shows admin status and system metrics when authorized.",
+      "usage": "/admin",
+      "examples": [
+        "User: /admin → Bot: stats if Telegram ID is authorized"
+      ],
+      "notes": "Requires ADMIN_TELEGRAM_IDS. Disabled safely when missing."
+    },
+    {
+      "command": "/reset",
+      "description": "Clears stored memory for the current user and chat.",
+      "usage": "/reset",
+      "examples": [
+        "User: /reset → Bot: memory cleared"
+      ],
+      "notes": "Works with MongoDB or in-memory fallback."
+    }
+  ]
+}

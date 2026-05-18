@@ -1,0 +1,62 @@
+[
+  {
+    "name": "admin",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "alerts",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "assets",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "backtest",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "dashboard",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "help",
+    "file": "src/commands/help.js"
+  },
+  {
+    "name": "indicators",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "journal",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "market",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "patterns",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "reset",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "risk",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "signal",
+    "file": "src/commands/trading.js"
+  },
+  {
+    "name": "start",
+    "file": "src/commands/start.js"
+  },
+  {
+    "name": "strategies",
+    "file": "src/commands/trading.js"
+  }
+]

@@ -1,0 +1,9 @@
+# Changelog
+
+All notable changes to this bot project are recorded here.
+
+## 2026-05-18 02:07:50. UTC
+- Request: # Professional AI Agent Prompt — Pocket Option Market Analysis & Signal Assistant ## Project Overview Build a professional AI-powered market analysis and trading signal assistant inspired by the Pocket Option trading ex…
+- Summary: Built Pocket Signal as a single-process Telegram bot plus Mini App service with commands, market analysis, AI-gated explanations, MongoDB-safe storage, demo fallback data, admin gating, scheduler logs, docs, and deploy …
+- Files: .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js, src/commands/loader.js, src/commands/start.js, src/commands/trading.js, src/features/scheduler.js, src/features/server.js, src/index.js, src/lib/ai.js, src/lib/botProfile.js (+16…
+

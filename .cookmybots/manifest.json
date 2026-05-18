@@ -8,7 +8,6 @@
       "examples": [
         "User: /admin → Bot: stats if Telegram ID is authorized"
       ],
-      "example": "User: /admin → Bot: stats if Telegram ID is authorized",
       "notes": "Requires ADMIN_TELEGRAM_IDS. Disabled safely when missing."
     },
     {
@@ -18,23 +17,34 @@
       "examples": [
         "User: /alerts → Bot: alert types and dashboard link"
       ],
-      "example": "User: /alerts → Bot: alert types and dashboard link",
       "notes": "Alerts use cooldowns to avoid spam."
     },
     {
       "command": "/assets",
-      "description": "Handler for /assets",
-      "example": "User: /assets → bot replies."
+      "description": "Lists supported example assets by category and explains provider availability.",
+      "usage": "/assets",
+      "examples": [
+        "User: /assets → Bot: forex, crypto, commodities, and indices examples"
+      ],
+      "notes": "Live availability depends on MARKET_DATA_ENDPOINT provider support."
     },
     {
       "command": "/backtest",
-      "description": "Runs a bounded simulation and returns backtest metrics.",
-      "usage": "/backtest EURUSD 1m",
+      "description": "Runs a bounded educational simulation for a symbol/timeframe.",
+      "usage": "/backtest SYMBOL TIMEFRAME",
       "examples": [
-        "User: /backtest BTCUSD 5m → Bot: win rate, drawdown, profit factor, Sharpe-like ratio"
+        "User: /backtest SOLUSD 1h → Bot: simulation metrics and limitation disclaimer"
       ],
-      "example": "User: /backtest BTCUSD 5m → Bot: win rate, drawdown, profit factor, Sharpe-like ratio",
-      "notes": "Simulation does not imply live profitability."
+      "notes": "Backtesting does not imply future profitability."
+    },
+    {
+      "command": "/chart",
+      "description": "Opens or displays a live chart summary for the requested symbol and timeframe.",
+      "usage": "/chart SYMBOL TIMEFRAME",
+      "examples": [
+        "User: /chart BTCUSD 5m → Bot: chart summary and Mini App chart button"
+      ],
+      "notes": "Uses provider data when available; demo/sample fallback is clearly labeled."
     },
     {
       "command": "/dashboard",
@@ -43,48 +53,52 @@
       "examples": [
         "User: /dashboard → Bot: Mini App open button"
       ],
-      "example": "User: /dashboard → Bot: Mini App open button",
-      "notes": "If no URL is configured, the bot sends a safe setup message."
+      "notes": "If no URL is configured, the bot sends setup guidance."
     },
     {
       "command": "/help",
-      "description": "Lists public commands and explains the educational risk disclaimer.",
+      "description": "Lists public commands, supported symbols/timeframes, and risk disclaimer.",
       "usage": "/help",
       "examples": [
-        "User: /help → Bot: command list and disclaimer"
+        "User: /help → Bot: command list and supported examples"
       ],
-      "example": "User: /help → Bot: command list and disclaimer",
-      "notes": "All insights are probability-based and not financial advice."
+      "notes": "All insights are educational and probability-based."
     },
     {
       "command": "/indicators",
-      "description": "Handler for /indicators",
-      "example": "User: /indicators → bot replies."
+      "description": "Shows technical indicator readings for a symbol/timeframe.",
+      "usage": "/indicators SYMBOL TIMEFRAME",
+      "examples": [
+        "User: /indicators ETHUSD 4h → Bot: RSI, MACD, EMA, SMA, Bollinger, Stochastic RSI, VWAP, ATR"
+      ],
+      "notes": "Falls back safely to labeled demo/sample data when provider data is unavailable."
     },
     {
       "command": "/journal",
       "description": "Logs a demo trade entry.",
-      "usage": "/journal EURUSD BUY win clean breakout",
+      "usage": "/journal SYMBOL DIRECTION RESULT NOTES",
       "examples": [
-        "User: /journal EURUSD SELL loss late entry → Bot: demo journal entry saved"
+        "User: /journal EURUSD BUY win clean breakout → Bot: demo journal entry saved"
       ],
-      "example": "User: /journal EURUSD SELL loss late entry → Bot: demo journal entry saved",
       "notes": "No real broker execution is connected."
     },
     {
       "command": "/market",
-      "description": "Shows current market overview for an asset and timeframe.",
-      "usage": "/market EURUSD 1m",
+      "description": "Shows market overview, current price, recent high/low, volatility, trend, support, and resistance.",
+      "usage": "/market SYMBOL TIMEFRAME",
       "examples": [
-        "User: /market BTCUSD 5m → Bot: price, trend, volatility, support, resistance"
+        "User: /market EURUSD 1h → Bot: provider or demo-labeled overview"
       ],
-      "example": "User: /market BTCUSD 5m → Bot: price, trend, volatility, support, resistance",
-      "notes": "Falls back to clearly labeled demo data if provider data is unavailable."
+      "notes": "Supported timeframes: 1m, 5m, 15m, 1h, 4h, 1d."
     },
     {
       "command": "/patterns",
-      "description": "Handler for /patterns",
-      "example": "User: /patterns → bot replies."
+      "description": "Shows detected candlestick patterns for a symbol/timeframe.",
+      "usage": "/patterns SYMBOL TIMEFRAME",
+      "examples": [
+        "User: /patterns USDJPY 1d → Bot: detected patterns and bias"
+      ],
+      "notes": "Pattern signals are educational context, not predictions."
     },
     {
       "command": "/reset",
@@ -93,37 +107,33 @@
       "examples": [
         "User: /reset → Bot: memory cleared"
       ],
-      "example": "User: /reset → Bot: memory cleared",
       "notes": "Works with MongoDB or in-memory fallback."
     },
     {
       "command": "/risk",
-      "description": "Shows risk percentage, max daily loss, loss stop, cooldown, volatility adjustment, and emotional trading alerts.",
+      "description": "Shows risk settings and educational safeguards.",
       "usage": "/risk",
       "examples": [
         "User: /risk → Bot: current risk settings"
       ],
-      "example": "User: /risk → Bot: current risk settings",
       "notes": "Risk settings are educational safeguards."
     },
     {
       "command": "/signal",
       "description": "Generates a probability-based BUY, SELL, or NEUTRAL analytical label.",
-      "usage": "/signal EURUSD 1m",
+      "usage": "/signal SYMBOL TIMEFRAME",
       "examples": [
-        "User: /signal EURUSD 1m → Bot: confidence, probability, risk, expiration, rationale"
+        "User: /signal XAUUSD 15m → Bot: confidence, probability, support/resistance, volatility warning, validity window, and disclaimer"
       ],
-      "example": "User: /signal EURUSD 1m → Bot: confidence, probability, risk, expiration, rationale",
-      "notes": "Labels are analytical only, not trade instructions."
+      "notes": "Educational analysis only, not trade instructions."
     },
     {
       "command": "/start",
-      "description": "Shows Pocket Signal welcome text, risk disclaimer, and action buttons.",
+      "description": "Shows welcome text, risk disclaimer, supported examples, and dashboard buttons.",
       "usage": "/start",
       "examples": [
-        "User: /start → Bot: welcome, disclaimer, dashboard, quick signal, alerts, help"
+        "User: /start → Bot: welcome, chart examples, dashboard button, and risk disclaimer"
       ],
-      "example": "User: /start → Bot: welcome, disclaimer, dashboard, quick signal, alerts, help",
       "notes": "Dashboard button requires WEBAPP_PUBLIC_URL, RENDER_EXTERNAL_URL, or PUBLIC_BASE_URL."
     },
     {
@@ -133,7 +143,6 @@
       "examples": [
         "User: /strategies → Bot: Balanced RSI MACD rules"
       ],
-      "example": "User: /strategies → Bot: Balanced RSI MACD rules",
       "notes": "Use the Mini App for richer strategy-building UI."
     }
   ],
@@ -145,6 +154,14 @@
     {
       "role": "assistant",
       "content": "Built Pocket Signal as a single-process Telegram bot plus Mini App service with commands, market analysis, AI-gated explanations, MongoDB-safe storage, demo fallback data, admin gating, scheduler logs, docs, and deploy scripts.\n\nFiles touched (30): .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+    },
+    {
+      "role": "user",
+      "content": "The bot should predict on live real market chart it should not be only one currency pair"
+    },
+    {
+      "role": "assistant",
+      "content": "Refined the Telegram trading bot for multi-asset live chart analysis, added /chart, generic market-data provider support, safer fallbacks, improved Mini App dashboard, updated docs, and fixed the MongoDB upsert conflict.\n\nFiles touched (21): .env.sample, DOCS.md, README.md, commands.json, package.json, src/bot.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
     }
   ],
   "createdBy": "6a0a70949f1841f749751ac5",
@@ -177,7 +194,7 @@
       "key": "PORT",
       "title": "HTTP Port",
       "description": "Port for the single Node service that hosts the bot APIs and Mini App.",
-      "usage": "Express listens on this port.",
+      "usage": "Express listens on this port. Defaults to 3000.",
       "example": "3000",
       "isSecret": false,
       "required": false
@@ -186,7 +203,7 @@
       "key": "MONGODB_URI",
       "title": "MongoDB URI",
       "description": "Optional MongoDB connection string for users, settings, assets, strategies, alerts, trades, backtests, signals, risk settings, system logs, and memory.",
-      "usage": "If missing, the bot runs in limited in-memory demo mode.",
+      "usage": "If missing, the bot runs with limited in-memory persistence and logs a warning.",
       "example": "mongodb+srv://user:pass@cluster/db",
       "isSecret": true,
       "required": false
@@ -212,8 +229,8 @@
     {
       "key": "MARKET_DATA_API_KEY",
       "title": "Market Data API Key",
-      "description": "Optional generic market data provider key for OHLC candles.",
-      "usage": "If missing or provider fails, demo/delayed sample data is used and labeled.",
+      "description": "Optional generic market data provider key.",
+      "usage": "Sent to the provider as Authorization Bearer and x-api-key. Never logged.",
       "example": "provider-key-format",
       "isSecret": true,
       "required": false
@@ -222,7 +239,7 @@
       "key": "WEBAPP_PUBLIC_URL",
       "title": "Web App Public URL",
       "description": "Optional public URL used for Telegram Mini App launch buttons.",
-      "usage": "If missing, the bot falls back to Render/PUBLIC_BASE_URL when available, otherwise shows a safe setup message.",
+      "usage": "If missing, the bot falls back to Render/PUBLIC_BASE_URL when available, otherwise sends setup guidance.",
       "example": "https://your-service.onrender.com/app",
       "isSecret": false,
       "required": false
@@ -262,26 +279,35 @@
       "example": "20",
       "isSecret": false,
       "required": false
+    },
+    {
+      "key": "MARKET_DATA_ENDPOINT",
+      "title": "Market Data Endpoint",
+      "description": "Optional generic provider endpoint used to fetch recent OHLCV candles.",
+      "usage": "If missing or provider fails, the bot uses clearly labeled demo/sample data.",
+      "example": "https://provider.example.com/candles",
+      "isSecret": false,
+      "required": false
     }
   ],
   "commandDocs": [
     {
       "command": "/start",
-      "description": "Shows Pocket Signal welcome text, risk disclaimer, and action buttons.",
+      "description": "Shows welcome text, risk disclaimer, supported examples, and dashboard buttons.",
       "usage": "/start",
       "examples": [
-        "User: /start → Bot: welcome, disclaimer, dashboard, quick signal, alerts, help"
+        "User: /start → Bot: welcome, chart examples, dashboard button, and risk disclaimer"
       ],
       "notes": "Dashboard button requires WEBAPP_PUBLIC_URL, RENDER_EXTERNAL_URL, or PUBLIC_BASE_URL."
     },
     {
       "command": "/help",
-      "description": "Lists public commands and explains the educational risk disclaimer.",
+      "description": "Lists public commands, supported symbols/timeframes, and risk disclaimer.",
       "usage": "/help",
       "examples": [
-        "User: /help → Bot: command list and disclaimer"
+        "User: /help → Bot: command list and supported examples"
       ],
-      "notes": "All insights are probability-based and not financial advice."
+      "notes": "All insights are educational and probability-based."
     },
     {
       "command": "/dashboard",
@@ -290,25 +316,25 @@
       "examples": [
         "User: /dashboard → Bot: Mini App open button"
       ],
-      "notes": "If no URL is configured, the bot sends a safe setup message."
+      "notes": "If no URL is configured, the bot sends setup guidance."
     },
     {
       "command": "/market",
-      "description": "Shows current market overview for an asset and timeframe.",
-      "usage": "/market EURUSD 1m",
+      "description": "Shows market overview, current price, recent high/low, volatility, trend, support, and resistance.",
+      "usage": "/market SYMBOL TIMEFRAME",
       "examples": [
-        "User: /market BTCUSD 5m → Bot: price, trend, volatility, support, resistance"
+        "User: /market EURUSD 1h → Bot: provider or demo-labeled overview"
       ],
-      "notes": "Falls back to clearly labeled demo data if provider data is unavailable."
+      "notes": "Supported timeframes: 1m, 5m, 15m, 1h, 4h, 1d."
     },
     {
       "command": "/signal",
       "description": "Generates a probability-based BUY, SELL, or NEUTRAL analytical label.",
-      "usage": "/signal EURUSD 1m",
+      "usage": "/signal SYMBOL TIMEFRAME",
       "examples": [
-        "User: /signal EURUSD 1m → Bot: confidence, probability, risk, expiration, rationale"
+        "User: /signal XAUUSD 15m → Bot: confidence, probability, support/resistance, volatility warning, validity window, and disclaimer"
       ],
-      "notes": "Labels are analytical only, not trade instructions."
+      "notes": "Educational analysis only, not trade instructions."
     },
     {
       "command": "/alerts",
@@ -322,15 +348,15 @@
     {
       "command": "/journal",
       "description": "Logs a demo trade entry.",
-      "usage": "/journal EURUSD BUY win clean breakout",
+      "usage": "/journal SYMBOL DIRECTION RESULT NOTES",
       "examples": [
-        "User: /journal EURUSD SELL loss late entry → Bot: demo journal entry saved"
+        "User: /journal EURUSD BUY win clean breakout → Bot: demo journal entry saved"
       ],
       "notes": "No real broker execution is connected."
     },
     {
       "command": "/risk",
-      "description": "Shows risk percentage, max daily loss, loss stop, cooldown, volatility adjustment, and emotional trading alerts.",
+      "description": "Shows risk settings and educational safeguards.",
       "usage": "/risk",
       "examples": [
         "User: /risk → Bot: current risk settings"
@@ -339,12 +365,12 @@
     },
     {
       "command": "/backtest",
-      "description": "Runs a bounded simulation and returns backtest metrics.",
-      "usage": "/backtest EURUSD 1m",
+      "description": "Runs a bounded educational simulation for a symbol/timeframe.",
+      "usage": "/backtest SYMBOL TIMEFRAME",
       "examples": [
-        "User: /backtest BTCUSD 5m → Bot: win rate, drawdown, profit factor, Sharpe-like ratio"
+        "User: /backtest SOLUSD 1h → Bot: simulation metrics and limitation disclaimer"
       ],
-      "notes": "Simulation does not imply live profitability."
+      "notes": "Backtesting does not imply future profitability."
     },
     {
       "command": "/strategies",
@@ -372,6 +398,42 @@
         "User: /reset → Bot: memory cleared"
       ],
       "notes": "Works with MongoDB or in-memory fallback."
+    },
+    {
+      "command": "/chart",
+      "description": "Opens or displays a live chart summary for the requested symbol and timeframe.",
+      "usage": "/chart SYMBOL TIMEFRAME",
+      "examples": [
+        "User: /chart BTCUSD 5m → Bot: chart summary and Mini App chart button"
+      ],
+      "notes": "Uses provider data when available; demo/sample fallback is clearly labeled."
+    },
+    {
+      "command": "/assets",
+      "description": "Lists supported example assets by category and explains provider availability.",
+      "usage": "/assets",
+      "examples": [
+        "User: /assets → Bot: forex, crypto, commodities, and indices examples"
+      ],
+      "notes": "Live availability depends on MARKET_DATA_ENDPOINT provider support."
+    },
+    {
+      "command": "/indicators",
+      "description": "Shows technical indicator readings for a symbol/timeframe.",
+      "usage": "/indicators SYMBOL TIMEFRAME",
+      "examples": [
+        "User: /indicators ETHUSD 4h → Bot: RSI, MACD, EMA, SMA, Bollinger, Stochastic RSI, VWAP, ATR"
+      ],
+      "notes": "Falls back safely to labeled demo/sample data when provider data is unavailable."
+    },
+    {
+      "command": "/patterns",
+      "description": "Shows detected candlestick patterns for a symbol/timeframe.",
+      "usage": "/patterns SYMBOL TIMEFRAME",
+      "examples": [
+        "User: /patterns USDJPY 1d → Bot: detected patterns and bias"
+      ],
+      "notes": "Pattern signals are educational context, not predictions."
     }
   ],
   "runStatuses": {
@@ -381,7 +443,7 @@
       "runId": "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp",
       "lastUserMessage": "The bot should predict on live real market chart it should not be only one currency pair",
       "startedAt": "2026-05-18T02:51:49.486Z",
-      "updatedAt": "2026-05-18T02:57:25.083Z",
+      "updatedAt": "2026-05-18T02:57:25.296Z",
       "message": "Syncing environment template with used env variables…",
       "commands": [
         {
@@ -457,7 +519,7 @@
     "runId": "a5919d93-b1d1-4bc5-957a-98144619645e:mpalyg5w:8h3fvp",
     "lastUserMessage": "The bot should predict on live real market chart it should not be only one currency pair",
     "startedAt": "2026-05-18T02:51:49.486Z",
-    "updatedAt": "2026-05-18T02:57:25.083Z",
+    "updatedAt": "2026-05-18T02:57:25.296Z",
     "message": "Syncing environment template with used env variables…",
     "commands": [
       {
